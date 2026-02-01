@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>10. Sınıf Dersleri</title>
+<style>
+* { box-sizing: border-box; }
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    background-color: white;
+    background-image: url("arkaplan.png");
+    background-repeat: no-repeat;
+    background-position: center 25%;
+    background-size: 60%;
+}
+/* SOL MENÜ */
+.menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 260px;
+    height: 100vh;
+    background-color: #1e88e5;
+    color: white;
+}
+.menu h2 {
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+    background-color: #1565c0;
+}
+.menu a {
+    display: block;
+    padding: 14px;
+    text-decoration: none;
+    color: white;
+    border-top: 1px solid rgba(255,255,255,0.2);
+}
+.menu a:hover {
+    background-color: #0d47a1;
+}
+/* ANA ALAN */
+.icerik {
+    margin-left: 300px;
+    padding: 40px;
+}
+.kutu {
+    background: rgba(255,255,255,0.9);
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 600px;
+}
+
+/* ✅ NOT DEFTERİ */
+.notes {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 220px;
+    background: #fffde7;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    padding: 10px;
+    font-size: 14px;
+    z-index: 999;
+    max-height: 400px;
+    overflow-y: auto;
+}
+.notes h3 { margin:0 0 8px 0; font-size: 15px; text-align:center;}
+.notes textarea { width:100%; height:50px; resize:none; padding:6px; font-size:13px;}
+.notes button { width:100%; margin-top:6px; padding:6px; background:#1976d2; color:white; border:none; border-radius:6px; cursor:pointer;}
+.notes ul { list-style:none; padding:0; margin-top:8px; }
+.notes li { background:#fff; padding:6px; margin-bottom:6px; border-radius:6px; display:flex; justify-content:space-between; align-items:center; }
+.delete { cursor:pointer; color:red; font-weight:bold; }
+</style>
+</head>
+<body>
+
+<!-- SOL MENÜ -->
+<div class="menu">
+    <h2>Dersler</h2>
+    <a href="10matematik.html">Matematik</a>
+    <a href="10fizik.html">Fizik</a>
+    <a href="10kimya.html">Kimya</a>
+    <a href="10biyoloji.html">Biyoloji</a>
+    <a href="10edebiyat.html">Türk Dili ve Edebiyatı</a>
+    <a href="10felsefe.html">Felsefe</a>
+    <a href="10din.html">Din Kültürü</a>
+    <a href="10yabancıdil.html">Yabancı Dil</a>
+</div>
+
+<!-- ANA ALAN -->
+<div class="icerik">
+    <div class="kutu">
+        <h1>10. Sınıf</h1>
+        <p>Sol menüden bir ders seçiniz.</p>
+    </div>
+</div>
+
+<!-- ✅ NOT DEFTERİ -->
+<div class="notes">
+    <h3>📝 Not Defteri</h3>
+    <textarea id="noteInput" placeholder="Not yaz..."></textarea>
+    <button onclick="addNote()">Ekle</button>
+    <ul id="noteList"></ul>
+</div>
+
+<script>
+/* NOT DEFTERİ JS */
+const noteList = document.getElementById("noteList");
+
+function loadNotes() {
+    const notes = JSON.parse(localStorage.getItem("notes")) || [];
+    noteList.innerHTML = "";
+    notes.forEach((note,index)=>{
+        const li = document.createElement("li");
+        li.innerHTML = `<span>${note}</span> <span class="delete" onclick="deleteNote(${index})">🗑</span>`;
+        noteList.appendChild(li);
+    });
+}
+
+function addNote() {
+    const input = document.getElementById("noteInput");
+    if(input.value.trim()==="") return;
+    const notes = JSON.parse(localStorage.getItem("notes")) || [];
+    notes.push(input.value);
+    localStorage.setItem("notes",JSON.stringify(notes));
+    input.value="";
+    loadNotes();
+}
+
+function deleteNote(index) {
+    const notes = JSON.parse(localStorage.getItem("notes")) || [];
+    notes.splice(index,1);
+    localStorage.setItem("notes",JSON.stringify(notes));
+    loadNotes();
+}
+
+loadNotes();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ana Sayfa - Öğrenci Yardım Yataklık Sistemi</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+/* GENEL */
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    min-height: 100vh;
+
+    background-image: url("arkaplan.png");
+    background-repeat: no-repeat;
+    background-position: center 25%;
+    background-size: 60%;
+    background-color: #ffffff;
+}
+
+/* ÜST BAR */
+.top-bar {
+    height: 50px;
+    width: 100%;
+    background-color: #f5f5f5;
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.menu-btn {
+    font-size: 22px;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* SOL MENÜ */
+.side-menu {
+    position: fixed;
+    top: 50px;
+    left: -260px;
+    width: 260px;
+    height: calc(100vh - 50px);
+    background-color: #1976d2;
+    padding: 20px;
+    transition: 0.3s;
+    color: white;
+    z-index: 999;
+}
+
+.side-menu.active {
+    left: 0;
+}
+
+.menu-title {
+    font-size: 18px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+/* MENÜ KUTULARI */
+.menu-box {
+    background-color: rgba(255,255,255,0.15);
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.menu-box:hover {
+    background-color: rgba(255,255,255,0.25);
+}
+
+/* SINIF LİSTESİ */
+.class-list {
+    display: none;
+    margin-top: 10px;
+}
+
+.class-item {
+    background-color: rgba(255,255,255,0.2);
+    padding: 10px;
+    border-radius: 6px;
+    margin-top: 8px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.class-item:hover {
+    background-color: rgba(255,255,255,0.35);
+}
+
+/* MOBİL AYARLAR */
+@media (max-width: 768px) {
+    body {
+        background-size: 85%;
+        background-position: center 35%;
+    }
+
+    .side-menu {
+        width: 100%;
+        left: -100%;
+    }
+
+    .side-menu.active {
+        left: 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ÜST BAR -->
+<div class="top-bar">
+    <div class="menu-btn" onclick="menuToggle()">☰</div>
+</div>
+
+<!-- SOL MENÜ -->
+<div class="side-menu" id="sideMenu">
+    <div class="menu-title">Menü</div>
+
+    <div class="menu-box" onclick="classToggle()">
+        Sınıf Seçin
+    </div>
+
+    <div class="class-list" id="classList">
+        <div class="class-item">9. Sınıf</div>
+
+        <div class="class-item" onclick="sinifGit()">
+            10. Sınıf
+        </div>
+
+        <div class="class-item">11. Sınıf</div>
+        <div class="class-item">12. Sınıf</div>
+    </div>
+</div>
+
+<script>
+function menuToggle() {
+    document.getElementById("sideMenu").classList.toggle("active");
+}
+
+function classToggle() {
+    const list = document.getElementById("classList");
+    list.style.display = (list.style.display === "block") ? "none" : "block";
+}
+
+function sinifGit() {
+    window.location.href = "10sinifdersler.html";
+}
+</script>
+
+</body>
+</html>
